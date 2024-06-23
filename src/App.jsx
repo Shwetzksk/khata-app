@@ -1,13 +1,17 @@
 import AddCustomerDialog from "@/components/add-customer-dialog";
-import Table from "@/components/customer-table";
-import EditCustomerDialog from "@/components/edit-customer-dialog";
-import { useMemo, useState } from "react";
-import "./App.css";
 import CustomerDetail from "@/components/customer-detail";
+import Table from "@/components/customer-table";
 import DeleteCustomer from "@/components/delete-customer";
+import EditCustomerDialog from "@/components/edit-customer-dialog";
+import { useMemo } from "react";
+import "./App.css";
+import useStore from "./store.js";
 
 function App() {
-  const [data, setData] = useState([]);
+  const data = useStore((state) => state.data);
+  const onUpdate = useStore((state) => state.update);
+  const onAdd = useStore((state) => state.add);
+  const onDelete = useStore((state) => state.delete);
   const columns = useMemo(() => {
     return [
       {
@@ -29,48 +33,27 @@ function App() {
           <div>
             <EditCustomerDialog
               data={row.original}
-              onClick={(edittedData) => {
-                const index = edittedData.index;
-                const dataArr = [...data];
-                dataArr[index] = edittedData;
-                setData(dataArr);
-              }}
+              onClick={(edittedData) => onUpdate(edittedData)}
             />
             <CustomerDetail data={row.original} />
-            <DeleteCustomer
-              onClick={() => {
-                const filteredData = data.filter(
-                  (_, i) => i !== row.original.index
-                );
-                setData(filteredData);
-              }}
-            />
+            <DeleteCustomer onClick={() => onDelete(row.original.index)} />
           </div>
         ),
       },
     ];
   }, [data]);
-  function handleAddData(data) {
-    const { name, items } = data;
-    const totalAmount = items.reduce((acc, cur) => acc + +cur.amount, 0);
 
-    setData((state) => [
-      ...state,
-      {
-        count: items.length,
-        total: totalAmount,
-        index: state.length,
-        items,
-        name,
-      },
-    ]);
-  }
   return (
     <section className="w-screen flex flex-col items-center">
       <nav className="w-full shadow bg-white flex justify-center py-1.5 px-3">
         <div className="flex w-full items-center justify-between max-w-5xl">
           <h3>Khata</h3>
-          <AddCustomerDialog onClick={handleAddData} />
+          <AddCustomerDialog
+            onClick={(data) => {
+              console.log("data add", data);
+              onAdd(data);
+            }}
+          />
         </div>
       </nav>
       <main className="max-w-5xl py-2 w-11/12">

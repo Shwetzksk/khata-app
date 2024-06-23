@@ -55,6 +55,7 @@ function EditCustomerDialog({ onClick, data }) {
                 handleChange();
                 handleClose();
               }}
+              disabled={!formData.name || !formData.items.length}
             >
               Save Changes
             </Button>

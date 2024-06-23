@@ -38,6 +38,7 @@ function AddCustomerForm({ onClick }) {
                 onClick(formData);
                 handleClose();
               }}
+              disabled={!formData.name || !formData.items.length}
             >
               Add Customer
             </Button>
