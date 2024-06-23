@@ -37,7 +37,7 @@ function EditCustomerDialog({ onClick, data }) {
       <DialogTrigger>
         <Button
           size="sm"
-          variant="outline"
+          variant="text"
           onClick={() => setFormData({ name: data.name, items: data.items })}
         >
           Edit

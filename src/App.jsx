@@ -4,6 +4,7 @@ import EditCustomerDialog from "@/components/edit-customer-dialog";
 import { useMemo, useState } from "react";
 import "./App.css";
 import CustomerDetail from "@/components/customer-detail";
+import DeleteCustomer from "@/components/delete-customer";
 
 function App() {
   const [data, setData] = useState([]);
@@ -36,6 +37,14 @@ function App() {
               }}
             />
             <CustomerDetail data={row.original} />
+            <DeleteCustomer
+              onClick={() => {
+                const filteredData = data.filter(
+                  (_, i) => i !== row.original.index
+                );
+                setData(filteredData);
+              }}
+            />
           </div>
         ),
       },
