@@ -1,8 +1,31 @@
-# React + Vite
+# Katha App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+App for Shop owner where shop owner can add, update, delete customer record.
 
-Currently, two official plugins are available:
+## Built with
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Shadcn/ui](https://ui.shadcn.com/)
+- [Zustand](https://zustand-demo.pmnd.rs/)
+- [Vite](https://vitejs.dev/guide/)
+- [Tailwind](https://tailwindcss.com/)
+- [pnpm](https://pnpm.io/)
+
+## Installation
+
+1.  Clone repository
+
+```bash
+git clone https://github.com/Shwetzksk/khata-app.git
+```
+
+2 Install packages
+
+```bash
+pnpm i
+```
+
+3.  Run locally
+
+```bash
+pnpm run dev
+```
