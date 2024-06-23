@@ -3,6 +3,7 @@ import Table from "@/components/customer-table";
 import EditCustomerDialog from "@/components/edit-customer-dialog";
 import { useMemo, useState } from "react";
 import "./App.css";
+import CustomerDetail from "@/components/customer-detail";
 
 function App() {
   const [data, setData] = useState([]);
@@ -24,15 +25,18 @@ function App() {
         accessorKey: "action",
         header: "Actions",
         cell: ({ row }) => (
-          <EditCustomerDialog
-            data={row.original}
-            onClick={(edittedData) => {
-              const index = edittedData.index;
-              const dataArr = [...data];
-              dataArr[index] = edittedData;
-              setData(dataArr);
-            }}
-          />
+          <div>
+            <EditCustomerDialog
+              data={row.original}
+              onClick={(edittedData) => {
+                const index = edittedData.index;
+                const dataArr = [...data];
+                dataArr[index] = edittedData;
+                setData(dataArr);
+              }}
+            />
+            <CustomerDetail data={row.original} />
+          </div>
         ),
       },
     ];
@@ -53,14 +57,14 @@ function App() {
     ]);
   }
   return (
-    <section className="w-screen">
+    <section className="w-screen flex flex-col items-center">
       <nav className="w-full shadow bg-white flex justify-center py-1.5 px-3">
         <div className="flex w-full items-center justify-between max-w-5xl">
           <h3>Khata</h3>
           <AddCustomerDialog onClick={handleAddData} />
         </div>
       </nav>
-      <main className="max-w-6xl p-2">
+      <main className="max-w-5xl py-2 w-11/12">
         <Table columns={columns} data={data} />
       </main>
     </section>
